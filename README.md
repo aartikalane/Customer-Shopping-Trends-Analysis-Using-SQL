@@ -336,14 +336,8 @@ ORDER BY Revenue_Percentage DESC;
 Category Contribution Percentage shows each category's share of total revenue, helping identify the most significant contributors to overall sales.
 
 
-## 5. Key Business Insights & Recommendation
+## 5. Conclusion
 
-Based on the analysis, the following business insights were identified:
-1.	Electronics dominate revenue, followed by home appliances and sporting goods. It contributes 52.29% of total revenue.
-2.	Electronics such as Laptop Pro X and Gaming Monitor are leading revenue drivers, despite low unit sales.
-3.	January was the top-performing month, generating total revenue of $39,042, likely driven by strong seasonal demand and increased customer spending at the beginning of the year.
-4.	North America is the leading region, contributing almost half of total revenue. It generates the highest regional sales revenue at $56K.
-5.	Credit cards are the most commonly used payment method, accounting for more than 50% of all units sold.
-
-
-
+The Customer Shopping Trends Analysis project successfully utilized SQL to explore customer purchasing behavior, sales performance, and shopping patterns. Through data analysis, valuable insights were uncovered regarding customer demographics, product preferences, spending habits, seasonal trends, and the effectiveness of promotional strategies.
+By transforming raw transactional data into actionable business insights, this project demonstrates how SQL can be used to support data-driven decision-making. The findings can help businesses optimize marketing campaigns, improve customer retention, manage inventory more effectively, and increase overall profitability.
+Overall, this project showcases the practical application of SQL for data analysis and business intelligence, enabling organizations to make informed decisions that enhance customer satisfaction and drive sustainable growth.
