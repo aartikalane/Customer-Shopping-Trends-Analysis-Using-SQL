@@ -1,1 +1,252 @@
 # Customer-Shopping-Trends-Analysis-Using-SQL
+
+In today's retail and e-commerce industry, understanding customer shopping behavior is essential for improving sales performance, enhancing customer satisfaction, and making data-driven business decisions. This project focuses on analyzing customer shopping trends using SQL by exploring customer demographics, purchasing patterns, product preferences, payment methods, and seasonal buying behavior.
+
+## 1. Project Objectives
+
+To analyze customer shopping trends dataset and uncover key insights that can help drive strategic decisions such as:
+
+- Analyze customer demographics and shopping preferences. 
+- Identify top-selling products and categories. 
+- Measure customer spending behavior and purchase frequency. 
+- Compare shopping trends across genders, age groups, and locations. 
+- Evaluate payment methods and purchasing patterns. 
+- Identify loyal and high-value customers. 
+- Generate actionable insights for business decision-making.
+
+
+## 2. Dataset Overview
+
+The Customer Shopping Trends dataset contains detailed information about customer demographics, purchasing behavior, shopping preferences, and transaction patterns. It is designed to help analysts explore customer buying habits and uncover insights that support better business decision-making.
+
+
+## 3. Skills Demonstrated
+
+- SQL Queries
+- Data Aggregation (SUM, AVG, COUNT) 
+- Grouping and Filtering (GROUP BY, HAVING)
+- Sorting and Ranking 
+- Subqueries and CTEs
+- Window Functions
+
+
+## 4. Execution
+
+Using SQL, this dataset can answer questions such as:
+
+__1) What are the Key Performance Indicators obtained from the Dataset?__
+
++ __Total Number of Customers:__
+
+SELECT 
+   COUNT(DISTINCT Customer_ID) AS Total_Customers
+FROM shopping_trends;
+
+<img width="473" height="167" alt="image" src="https://github.com/user-attachments/assets/68e1aae9-c94e-4b99-b009-cde38a444e4b" />
+
+Total Number of Customers represents the count of unique customers who made purchases during the selected period. This KPI helps evaluate customer reach, track business growth, and understand the overall size of the customer base.
+
+
++ __Total Revenue Generated:__
+
+SELECT 
+   SUM(Purchase_Amount_USD) AS Total_Revenue
+FROM shopping_trends;
+
+<img width="417" height="167" alt="image" src="https://github.com/user-attachments/assets/a517dbd6-177b-464f-b310-19b5e5c23bae" />
+
+Total Revenue Generated shows the total income from all customer purchases. It helps measure overall sales performance and track revenue trends.
+
+
++ __Average Purchase Amount:__
+
+SELECT 
+    ROUND(AVG(Purchase_Amount_USD), 2) AS Avg_Purchase
+FROM shopping_trends;
+
+<img width="384" height="163" alt="image" src="https://github.com/user-attachments/assets/27b103d8-66d4-462e-86ce-d63220cf3f79" />
+
+Average Purchase Amount shows the average amount spent per transaction. It helps evaluate customer spending behavior and overall sales performance.
+
+
+__2) Customer Demographics Analysis__
+
++ __Number of Customers by Gender:__
+
+SELECT 
+   Gender,
+   COUNT(*) AS Customer_Count
+FROM shopping_trends
+GROUP BY Gender;
+
+<img width="426" height="195" alt="image" src="https://github.com/user-attachments/assets/94fe7ff5-8cd3-40d5-a076-9faee4fb92e0" />
+
+Number of Customers by Gender shows the gender distribution of customers and helps identify key customer segments.
+
+
++ __Average Spending by Gender:__
+
+SELECT 
+    Gender,
+    ROUND(AVG(Purchase_Amount_USD),2) AS Avg_Spending
+FROM shopping_trends
+GROUP BY Gender;
+
+<img width="388" height="191" alt="image" src="https://github.com/user-attachments/assets/287ac015-0a0a-49d0-ac04-8e108c62206a" />
+
+Average Spending by Gender shows the average amount spent by each gender, helping identify spending patterns and customer behavior.
+
+
++ __Top Age Groups by Spending:__
+
+SELECT 
+    Age,
+    SUM(Purchase_Amount_USD) AS Total_Spent
+FROM shopping_trends
+GROUP BY Age
+ORDER BY Total_Spent DESC;
+
+<img width="273" height="245" alt="image" src="https://github.com/user-attachments/assets/a362946f-1d8a-4f20-af01-4ac44a060a7b" />
+
+Top Age Groups by Spending identifies the age groups that contribute the most revenue, helping target high-value customer segments.
+
+
+__3) Product Analysis__
+
++ __Top Selling Categories:__
+
+SELECT 
+    Category,
+    COUNT(*) AS Total_Purchases
+FROM shopping_trends
+GROUP BY Category
+ORDER BY Total_Purchases DESC;
+
+<img width="409" height="235" alt="image" src="https://github.com/user-attachments/assets/78665740-4072-440e-8826-dd8f0787d8d9" />
+
+Top Selling Categories highlights the product categories with the highest sales volume, helping identify the most popular products and key revenue drivers.
+
+
++ __Revenue by Category:__
+
+SELECT 
+   Category,
+   SUM(Purchase_Amount_USD) AS Revenue
+FROM shopping_trends
+GROUP BY Category
+ORDER BY Revenue DESC;
+
+<img width="384" height="222" alt="image" src="https://github.com/user-attachments/assets/026c0205-f08b-4b6e-af89-4ba2f4c1f049" />
+
+Revenue by Category shows the revenue generated by each product category, helping identify the most profitable categories and sales opportunities.
+
+
++ __Most Purchased Items:__
+
+SELECT 
+   Item_Purchased,
+   COUNT(*) AS Purchase_Count
+FROM shopping_trends
+GROUP BY Item_Purchased
+ORDER BY Purchase_Count DESC;
+
+<img width="376" height="282" alt="image" src="https://github.com/user-attachments/assets/3c7b8359-d37c-480b-98da-c330ef2c4a1a" />
+
+Most Purchased Items identifies the items bought most frequently, helping understand customer preferences and inventory demand.
+
+
+__4) Customer Behavior Analysis__
+
++ __Subscription vs Non-Subscription Spending:__
+
+SELECT 
+    Subscription_Status,
+    ROUND(AVG(Purchase_Amount_USD),2) AS Avg_Spending
+FROM shopping_trends
+GROUP BY Subscription_Status;
+
+<img width="407" height="176" alt="image" src="https://github.com/user-attachments/assets/9550ca0e-78e0-4de4-994c-3f3299ede75d" />
+
+Subscription vs Non-Subscription Spending compares spending between subscribed and non-subscribed customers, helping assess the impact of subscriptions on revenue.
+
+
++ __Purchase Frequency Analysis:__
+
+SELECT 
+   Frequency_of_Purchases,
+   COUNT(*) AS Customer_Count
+FROM shopping_trends
+GROUP BY Frequency_of_Purchases
+ORDER BY Customer_Count DESC;
+
+<img width="476" height="300" alt="image" src="https://github.com/user-attachments/assets/fa1439b5-4d5c-4dd2-a3c6-9dc0658f0865" />
+
+Purchase Frequency Analysis measures how often customers make purchases, helping identify buying patterns and customer loyalty.
+
+
+__5) Regional Analysis__
+
++ __Top 10 Location by Revenue:__
+
+ SELECT 
+    Location,
+    SUM(Purchase_Amount_USD) AS Revenue
+FROM shopping_trends
+GROUP BY Location
+ORDER BY Revenue DESC;
+
+<img width="360" height="357" alt="image" src="https://github.com/user-attachments/assets/f1e04ef2-63d6-4e58-b712-9f8581f06b29" />
+
+Top 10 Locations by Revenue highlights the locations generating the highest revenue, helping identify top-performing markets and sales opportunities.
+
+
+__6) Seasonal Trends__
+
++ __Sales by Season:__
+
+SELECT 
+    Season,
+    SUM(Purchase_Amount_USD) AS Total_Revenue
+FROM shopping_trends
+GROUP BY Season
+ORDER BY Total_Revenue DESC;
+
+<img width="448" height="220" alt="image" src="https://github.com/user-attachments/assets/aa24998e-a440-41f9-a77b-6315b4fc4155" />
+
+Sales by Season shows revenue across different seasons, helping identify seasonal trends and peak sales periods.
+
+
++ __Best-Selling Category in Each Season:__
+
+SELECT 
+   Season,
+   Category,
+   COUNT(*) AS Total_Sales
+FROM shopping_trends
+GROUP BY Season, Category
+ORDER BY Season, Total_Sales DESC;
+
+<img width="404" height="200" alt="image" src="https://github.com/user-attachments/assets/137254b9-c7f6-470c-b3bb-f778b6d56291" />
+<img width="404" height="203" alt="image" src="https://github.com/user-attachments/assets/fcc92390-6896-4e37-9a8e-d71f58320a99" />
+<img width="373" height="217" alt="image" src="https://github.com/user-attachments/assets/bb4c7ef1-eb07-43d6-b4da-b145e4ee0ea7" />
+
+Best-Selling Category in Each Season identifies the top-performing product category for each season, helping understand seasonal customer preferences and demand patterns.
+
+
+__7) Discounts and Promotions__
+
++ __Impact of Discounts on Sales:__
+
+SELECT 
+   Discount_Applied,
+   ROUND(AVG(Purchase_Amount_USD),2) AS Avg_Order_Value
+FROM shopping_trends
+GROUP BY Discount_Applied;
+
+<img width="445" height="170" alt="image" src="https://github.com/user-attachments/assets/d80ae9b1-a927-4aa9-bc0e-ba35614ca329" />
+
+Impact of Discounts on Sales analyzes how discounts influence customer spending and overall sales performance.
+
++ __Best-Selling Category in Each Season:__
+
+
