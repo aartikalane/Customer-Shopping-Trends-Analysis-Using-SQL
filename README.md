@@ -247,6 +247,95 @@ GROUP BY Discount_Applied;
 
 Impact of Discounts on Sales analyzes how discounts influence customer spending and overall sales performance.
 
-+ __Best-Selling Category in Each Season:__
++ __Promo Code Usage:__
+
+SELECT 
+   Promo_Code_Used,
+  COUNT(*) AS Usage_Count
+FROM shopping_trends
+GROUP BY Promo_Code_Used;
+
+<img width="467" height="189" alt="image" src="https://github.com/user-attachments/assets/a339cec2-6df5-4dd4-90cb-a36fae3b73ef" />
+
+Promo Code Usage shows how often promo codes are used in purchases, helping evaluate the effectiveness of promotional campaigns.
+
+
+__8) Payment Analysis__
+
++ __Most Popular Payment Methods:__
+
+SELECT 
+    Payment_Method,
+    COUNT(*) AS Usage_Count
+FROM shopping_trends
+GROUP BY Payment_Method
+ORDER BY Usage_Count DESC;
+
+<img width="407" height="272" alt="image" src="https://github.com/user-attachments/assets/8203bca6-22b1-41e4-9680-bb361430e5bc" />
+
+Most Popular Payment Methods identifies the payment options customers use most frequently, helping understand payment preferences and optimize checkout experiences.
+
+
++ __Revenue by Payment Method:__
+
+SELECT 
+   Payment_Method,
+   SUM(Purchase_Amount_USD) AS Revenue
+FROM shopping_trends
+GROUP BY Payment_Method
+ORDER BY Revenue DESC;
+
+<img width="409" height="275" alt="image" src="https://github.com/user-attachments/assets/db840ab3-6150-421c-921f-8234aac516d3" />
+
+Revenue by Payment Method shows the revenue generated through each payment method, helping identify customer payment preferences and their contribution to sales.
+
+
+__9) Advanced SQL Queries__
+
++ __Top 5 Highest Spending Customers:__
+
+SELECT 
+  Customer_ID,
+  SUM(Purchase_Amount_USD) AS Total_Spent
+FROM shopping_trends
+GROUP BY Customer_ID
+ORDER BY Total_Spent DESC;
+
+<img width="367" height="226" alt="image" src="https://github.com/user-attachments/assets/babec606-7836-4188-86b8-28531e45df16" />
+
+Top 5 Highest Spending Customers identifies the customers who contribute the most revenue, helping recognize high-value customers and support retention strategies.
+
+
++ __Top 5 Customer Ranking by Spending:__
+
+SELECT 
+  Customer_ID,
+  SUM(Purchase_Amount_USD) AS Total_Spent,
+  RANK() OVER(
+ORDER BY SUM(Purchase_Amount_USD) DESC
+) AS Customer_Rank
+FROM shopping_trends
+GROUP BY Customer_ID;
+
+<img width="447" height="223" alt="image" src="https://github.com/user-attachments/assets/7d8c92d0-983c-4ab8-854f-a42a3c63f53d" />
+
+Top 5 Customer Ranking by Spending highlights the five highest-spending customers, helping identify key revenue contributors and high-value customer segments.
+
+
++ __Category Contribution Percentage:__
+
+SELECT 
+   Category,
+   ROUND(SUM(Purchase_Amount_USD) * 100.0 / (SELECT SUM(Purchase_Amount_USD) FROM shopping_trends), 2) AS Revenue_Percentage
+FROM shopping_trends
+GROUP BY Category
+ORDER BY Revenue_Percentage DESC;
+
+<img width="432" height="217" alt="image" src="https://github.com/user-attachments/assets/0386d2a7-9c0f-4ba1-b2a1-31d224228c13" />
+
+Category Contribution Percentage shows each category's share of total revenue, helping identify the most significant contributors to overall sales.
+
+
+
 
 
