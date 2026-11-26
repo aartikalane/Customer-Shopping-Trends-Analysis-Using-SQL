@@ -83,19 +83,6 @@ ORDER BY Purchase_Count DESC;
 
 
 
---Customers Spending Above Average
-SELECT 
-     Customer_ID,
-     Purchase_Amount_USD
-FROM shopping_trends
-WHERE Purchase_Amount_USD >
-(
-SELECT AVG(Purchase_Amount_USD)
-FROM shopping_trends
-);
-
-
-
 --Subscription vs Non-Subscription Spending
 SELECT 
    Subscription_Status,
@@ -115,24 +102,13 @@ ORDER BY Customer_Count DESC;
 
 
 
---Revenue by Location
+--Top 10 Location by Revenue
 SELECT 
    Location,
    SUM(Purchase_Amount_USD) AS Revenue
 FROM shopping_trends
 GROUP BY Location
 ORDER BY Revenue DESC;
-
-
-
---Top 10 Locations by Sales
-SELECT 
-   Location,
-   SUM(Purchase_Amount_USD) AS Total_Sales
-FROM shopping_trends
-GROUP BY Location
-ORDER BY Total_Sales DESC;
-
 
 
 --Sales by Season
@@ -203,7 +179,7 @@ ORDER BY Total_Spent DESC;
 
 
 
---Customer Ranking by Spending
+--Top 5 Customer Ranking by Spending
 SELECT 
     Customer_ID,
     SUM(Purchase_Amount_USD) AS Total_Spent,
@@ -224,15 +200,6 @@ GROUP BY Category
 ORDER BY Revenue_Percentage DESC;
 
 
-
---Repeat Customer Analysis
-SELECT 
-   Customer_ID,
-   COUNT(*) AS Total_Orders
-FROM shopping_trends
-GROUP BY Customer_ID 
-HAVING COUNT(*) > 1
-ORDER BY Total_Orders DESC;
 
 
 
